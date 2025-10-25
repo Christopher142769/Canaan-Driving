@@ -16,7 +16,10 @@ const PORT = process.env.PORT || 5000; // Utiliser la variable d'environnement
 
 // --- Middlewares ---
 app.use(cors());
-app.use(express.json());
+// MODIFICATION: Augmenter les limites pour les payloads (JSON et URL-encoded)
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 
 // --- Connexion à MongoDB ---
 const mongoURI = process.env.MONGO_URI; // Maintenant chargé depuis .env
@@ -65,7 +68,8 @@ const auth = (req, res, next) => {
 const storage = multer.memoryStorage();
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 100 * 1024 * 1024 } // Limite à 100MB
+    // MODIFICATION: Limite ajustée à 30MB
+    limits: { fileSize: 30 * 1024 * 1024 } // Limite à 30MB
 });
 
 // --- FONCTIONS UTILITAIRES ---
