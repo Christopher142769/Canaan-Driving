@@ -198,8 +198,25 @@ body {
 
 
 /* --- Overlay d'Upload --- */
-/* (Styles déjà fournis, vérifier cohérence) */
-.upload-overlay { background-color: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); } /* neutral-900 */
+/* (MODIFICATION: Style d'overlay centré) */
+.upload-overlay {
+  /* Propriétés de base */
+  background-color: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  
+  /* Propriétés ajoutées pour le centrage et la superposition */
+  position: fixed; /* Se superpose à tout */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Pleine largeur de l'écran */
+  height: 100vh; /* Pleine hauteur de l'écran */
+  z-index: 2000; /* Au-dessus de tout le reste (sauf les toasts peut-être) */
+
+  /* Centrage du contenu (la Card) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .upload-overlay-content { border-radius: var(--border-radius-lg); }
 .upload-overlay .card-header { background: var(--gradient-primary); }
 .upload-overlay .upload-indicator-item { border-radius: var(--border-radius); border-color: var(--border-color); background-color: var(--content-bg-color); }

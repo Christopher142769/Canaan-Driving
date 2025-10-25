@@ -983,6 +983,7 @@ const Dashboard = () => {
                             <>
                                 <i className="bi bi-file-earmark-lock display-3 opacity-50 mb-3"></i>
                                 <p>Aperçu non disponible pour ce type de fichier.</p>
+
                                 <p className="small">({fileViewer?.mimetype || 'inconnu'})</p>
                             </>
                         )}
