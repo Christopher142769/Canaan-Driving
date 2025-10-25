@@ -1,0 +1,263 @@
+/* src/App.css - Refonte "À Fond V3" */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Palette Vibrante */
+  --primary-50: #f0f9ff;  --primary-100: #e0f2fe;  --primary-200: #bae6fd;
+  --primary-300: #7dd3fc; --primary-400: #38bdf8; --primary-500: #0ea5e9; /* Cyan Primaire */
+  --primary-600: #0284c7; --primary-700: #0369a1; --primary-900: #0c4a6e;
+
+  --secondary-500: #64748b; --secondary-700: #334155;
+
+  --success-500: #10b981; --success-600: #059669;
+  --danger-500: #ef4444;  --danger-600: #dc2626;
+  --warning-500: #f59e0b; --warning-600: #d97706;
+  --info-500: #3b82f6;   --info-600: #2563eb;
+
+  /* Neutres */
+  --neutral-50: #f8fafc;  --neutral-100: #f1f5f9; --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1; --neutral-400: #94a3b8; --neutral-700: #334155;
+  --neutral-900: #0f172a;
+
+  /* Thème */
+  --bg-color: var(--neutral-100);
+  --content-bg-color: #ffffff;
+  --text-color: var(--neutral-900);
+  --text-muted-color: var(--secondary-500);
+  --border-color: var(--neutral-200);
+
+  --primary-color: var(--primary-500);
+  --primary-hover: var(--primary-600);
+  --primary-glow: rgba(14, 165, 233, 0.4); /* Glow Cyan */
+  --gradient-primary: linear-gradient(60deg, var(--primary-400), var(--primary-600));
+  --gradient-success: linear-gradient(60deg, var(--success-500), #047857); /* Nuance plus foncée */
+
+  --border-radius: 0.5rem; /* 8px */
+  --border-radius-lg: 0.75rem; /* 12px */
+  --box-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --box-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --box-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Styles Globaux --- */
+body {
+  font-family: var(--font-sans);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.auth-page-background { background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%); }
+.dashboard-background { background-color: var(--bg-color); }
+
+/* --- Layout --- */
+.app-header-canaan {
+  background: var(--gradient-primary);
+  padding: 0.8rem 2rem; /* Plus d'espace */
+  box-shadow: var(--box-shadow-lg); /* Ombre plus forte */
+  color: white;
+  position: sticky; top: 0; z-index: 1050; /* Header sticky */
+}
+.app-header-canaan .logo i { font-size: 1.8rem; margin-right: 0.7rem; }
+.app-header-canaan .logo .fw-bold { font-size: 1.25rem; font-weight: 700 !important; }
+
+.app-main-canaan {
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+/* --- Boutons "Signature" --- */
+.btn {
+  border-radius: 9999px !important; padding: 0.75rem 1.6rem; font-weight: 600;
+  font-size: 0.9rem; text-transform: none; letter-spacing: 0.3px; /* Léger espacement */
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all var(--transition-normal); border: none; position: relative; overflow: hidden; z-index: 1;
+  transform: translateZ(0); /* Active accélération GPU */
+}
+.btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.15); opacity: 0; transform: scale(0.7); transition: all var(--transition-normal); z-index: -1; border-radius: inherit; }
+.btn:hover { transform: translateY(-3px) translateZ(5px); box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08); }
+.btn:hover::before { opacity: 1; transform: scale(1); }
+.btn:active { transform: translateY(-1px) scale(0.98); box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
+
+/* Styles spécifiques pour le bouton Upload principal */
+#dropdown-upload.btn-success {
+  background: var(--gradient-success);
+  color: white;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); /* Glow vert */
+}
+#dropdown-upload.btn-success:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary { background: var(--gradient-primary); color: white; box-shadow: 0 4px 10px var(--primary-glow); }
+.btn-primary:hover { filter: brightness(1.1); box-shadow: 0 8px 20px var(--primary-glow); }
+
+.btn-outline-primary {
+  color: var(--primary-600); border: 2px solid var(--primary-300); background-color: transparent; box-shadow: none;
+}
+.btn-outline-primary:hover { background-color: var(--primary-50); border-color: var(--primary-500); color: var(--primary-600); box-shadow: 0 4px 10px var(--primary-glow); }
+
+/* Bouton Logout */
+.logout-btn { /* Style comme un outline discret */
+  border: 1px solid rgba(255, 255, 255, 0.5); color: rgba(255, 255, 255, 0.9); padding: 0.4rem 1rem !important; font-size: 0.8rem !important; text-transform: none !important; box-shadow: none;
+}
+.logout-btn:hover { background-color: rgba(255, 255, 255, 0.1); border-color: white; color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); }
+
+/* --- Authentification --- */
+.auth-card-canaan { border-radius: 1.25rem !important; box-shadow: var(--box-shadow-xl); max-width: 420px; }
+.auth-card-canaan .card-body { padding: 3rem; }
+.auth-card-canaan .input-group { border-radius: var(--border-radius); border: 1px solid var(--neutral-300); }
+.auth-card-canaan .input-group:focus-within { border-color: var(--primary-color); box-shadow: 0 0 0 3px var(--primary-glow); }
+
+/* --- Dashboard --- */
+.action-bar-canaan {
+  background-color: var(--content-bg-color); padding: 1rem 1.5rem;
+  border-radius: var(--border-radius-lg); box-shadow: var(--box-shadow); margin-bottom: 2rem;
+  /* position: sticky; top: calc(var(--header-height, 60px) + 1rem); z-index: 1000; */ /* Optionnel: Barre sticky */
+}
+.custom-breadcrumb .breadcrumb-item a { color: var(--primary-600); font-weight: 500; }
+.custom-breadcrumb .breadcrumb-item a:hover { color: var(--primary-700); text-decoration: underline; }
+.custom-breadcrumb .breadcrumb-item.active { color: var(--neutral-900); font-weight: 600; }
+
+.content-area-canaan {
+  background-color: var(--content-bg-color); border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow); padding: 2rem; /* Plus de padding interne */
+}
+
+/* --- Vues Liste & Grille --- */
+/* Effet commun au survol */
+.list-item-canaan, .grid-item-col { /* Cibler la colonne pour la grille */
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+.list-item-canaan:hover, .grid-item-col:hover {
+  transform: translateY(-5px);
+  z-index: 10;
+  position: relative;
+}
+.list-item-canaan:hover { background-color: var(--primary-50); }
+.grid-item-col:hover .grid-item-canaan { box-shadow: var(--box-shadow-xl); }
+
+/* Liste */
+.file-list-canaan .list-group-item { border: none; border-bottom: 1px solid var(--border-color); padding: 1rem 1.2rem; }
+.list-icon-canaan .bi { font-size: 1.5rem; vertical-align: middle; }
+.item-name-list { font-weight: 600; font-size: 0.95rem; color: var(--neutral-700); }
+.list-group-header { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding-bottom: 0.8rem; }
+
+/* Grille */
+.grid-item-canaan {
+  border: 1px solid var(--border-color); /* Bordure subtile */
+  border-radius: var(--border-radius-lg); box-shadow: var(--box-shadow-sm); cursor: pointer; overflow: hidden; /* Important pour le footer */
+  display: flex; flex-direction: column; height: 100%; /* Assure hauteur égale */
+}
+.grid-item-canaan .card-body { padding: 1.5rem 1rem; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.item-icon-canaan { font-size: 3.5rem; margin-bottom: 1rem; color: var(--text-muted-color); }
+.item-name-canaan { font-size: 0.85rem; font-weight: 600; color: var(--neutral-700); margin-top: 0.5rem; }
+.grid-item-canaan .card-footer {
+  background-color: var(--neutral-50); border-top: 1px solid var(--border-color); padding: 0.5rem;
+  opacity: 0; transform: translateY(100%); /* Commence caché en bas */
+  transition: all var(--transition-normal);
+  height: 48px; /* Hauteur fixe pour l'animation */
+  display: flex; align-items: center; justify-content: center;
+}
+.grid-item-canaan:hover .card-footer { opacity: 1; transform: translateY(0); }
+
+/* --- Boutons d'Action (Liste/Grille) - Style Amélioré --- */
+.item-actions-list .btn, .item-actions-grid .btn {
+  border-radius: 50% !important; width: 36px; height: 36px; padding: 0; display: inline-flex;
+  align-items: center; justify-content: center; margin: 0 2px; font-size: 1rem; box-shadow: none;
+  border: none; transition: all var(--transition-fast); background: transparent; position: relative;
+}
+.item-actions-list .btn:hover, .item-actions-grid .btn:hover {
+    transform: scale(1.1) translateY(-1px); /* Léger scale + levitation */
+    background-color: var(--neutral-100);
+    box-shadow: var(--box-shadow-sm);
+}
+/* Couleurs spécifiques au survol */
+.btn.btn-outline-primary:hover { background-color: var(--primary-100); color: var(--primary-700); }
+.btn.btn-outline-info:hover { background-color: #cff4fc; color: #055160; }
+.btn.btn-outline-secondary:hover { background-color: var(--neutral-200); color: var(--secondary-700); }
+.btn.btn-outline-danger:hover { background-color: #f8d7da; color: #58151c; }
+
+
+/* --- Empty State Plus Engageant --- */
+.empty-folder-indicator-canaan i {
+  font-size: 5rem; color: var(--primary-300); opacity: 0.8;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.empty-folder-indicator-canaan h4 { font-weight: 700; color: var(--neutral-700); }
+.empty-folder-indicator-canaan p { color: var(--text-muted-color); }
+
+
+/* --- Overlay d'Upload --- */
+/* (Styles déjà fournis, vérifier cohérence) */
+.upload-overlay { background-color: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); } /* neutral-900 */
+.upload-overlay-content { border-radius: var(--border-radius-lg); }
+.upload-overlay .card-header { background: var(--gradient-primary); }
+.upload-overlay .upload-indicator-item { border-radius: var(--border-radius); border-color: var(--border-color); background-color: var(--content-bg-color); }
+
+/* --- Drag & Drop --- */
+.dropzone-overlay-canaan { background-color: rgba(2, 132, 199, 0.9); backdrop-filter: blur(8px); } /* primary-600 */
+.dropzone-content-canaan i { font-size: 7rem; }
+
+/* --- Responsivité Radicale --- */
+@media (max-width: 991px) { /* lg */
+  .app-main-canaan { padding: 1.5rem; }
+  .action-bar-canaan { padding: 0.75rem 1rem; }
+}
+
+@media (max-width: 767px) { /* md */
+  .app-main-canaan { padding: 1rem; }
+  .content-area-canaan { padding: 1rem; }
+  .action-bar-canaan { /* Pas sticky sur mobile par défaut */ }
+  .list-item-canaan .item-actions-list {
+      /* Mettre les boutons en colonne sous le nom? Ou juste wrap? */
+      /* Tentative de wrap simple */
+      text-align: start !important; margin-top: 0.5rem;
+      width: 100%; /* Prend toute la largeur */
+      flex-wrap: wrap; /* Permet aux boutons de passer à la ligne */
+      justify-content: flex-start !important;
+  }
+  .list-item-canaan .item-actions-list .btn-group {
+      margin-top: 0.5rem; /* Espace si ça passe à la ligne */
+  }
+}
+
+@media (max-width: 575px) { /* sm */
+  .app-header-canaan { padding: 0.5rem 1rem; }
+  .action-bar-canaan { padding: 0.5rem; }
+  .action-bar-canaan > .col-lg-5 { flex-wrap: wrap; justify-content: flex-start !important; }
+  .action-bar-canaan .btn-group { margin-right: 0 !important; margin-bottom: 0.5rem; width: 100%; display: flex; } /* View prend toute la largeur */
+  .action-bar-canaan .btn-group .btn { flex-grow: 1; }
+  .action-bar-canaan .btn { padding: 0.6rem 1rem; } /* Taille boutons réduite */
+
+  /* Empiler les boutons d'action dans la liste */
+  .list-item-canaan .item-actions-list {
+      text-align: start !important;
+      padding-top: 0.5rem;
+  }
+   .list-item-canaan .item-actions-list .btn-group {
+      display: flex;
+      flex-wrap: wrap; /* Pour petits écrans si même ça c'est trop */
+      gap: 0.5rem; /* Espace entre les boutons */
+      margin-top: 0;
+  }
+   .list-item-canaan .item-actions-list .btn {
+      margin: 0 !important; /* Retirer marge individuelle */
+   }
+
+  /* Footer de la grille toujours visible */
+  .grid-item-canaan .card-footer { opacity: 1; transform: translateY(0); background-color: var(--neutral-100); padding: 0.4rem; height: auto; }
+  .item-icon-canaan { font-size: 3rem; }
+}
+
+/* Animation pour l'erreur Auth */
+@keyframes headShake { /* (Garder cette animation) */ /* ... */ }
